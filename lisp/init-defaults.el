@@ -3,8 +3,11 @@
 (defconst is-osx (eq system-type 'darwin))
 (defconst my-gen-dir (file-name-as-directory (concat user-emacs-directory "gen")))
 
-;; Hide menu bar unless we're on a GUI within OSX.
-(unless (and window-system is-osx)
+;; Delete selection  with a keypress.
+(delete-selection-mode t)
+
+;; Hide menu bar unless we're on a GUI
+(unless (window-system)
   (menu-bar-mode -1))
 
 (when (fboundp 'tool-bar-mode)
@@ -37,7 +40,7 @@
 (show-paren-mode 1)
 (electric-pair-mode 1)
 (size-indication-mode t)
-(blink-cursor-mode -1)
+;; (blink-cursor-mode -1)
 
 (fringe-mode '(4 . 0))
 

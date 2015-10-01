@@ -52,6 +52,8 @@
   (load-theme 'solarized-dark t)
   (set-face-attribute 'region nil :background color-base3 :foreground color-magenta)
   (set-face-attribute 'mode-line nil :background color-mode-line-background :box nil))
+  (add-to-list 'default-frame-alist '(font .  "DejaVu Sans Mono-9" ))
+  (set-face-attribute 'default t :font  "DejaVu Sans Mono-9" )
 
 (use-package smart-mode-line
   :ensure t
@@ -103,11 +105,7 @@
   :init
   (setq company-dabbrev-ignore-case t
         company-dabbrev-downcase nil)
-  (add-hook 'after-init-hook 'global-company-mode)
-  :config
-  (use-package company-tern
-    :ensure t
-    :init (add-to-list 'company-backends 'company-tern)))
+  (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package yasnippet
   :disabled t
@@ -189,14 +187,14 @@
 
 (use-package json-mode
   :ensure t
-  :init (setq js-indent-level 2))
+  :init (setq js-indent-level 4))
 
 (use-package js2-mode
   :ensure t
   :mode "\\.js\\'"
   :init
   (setq js2-highlight-level 3
-        js2-basic-offset 2
+        js2-basic-offset 4
         js2-allow-rhino-new-expr-initializer nil
         js2-global-externs '("describe" "before" "beforeEach" "after" "afterEach" "it")
         js2-include-node-externs t)
@@ -206,11 +204,6 @@
   (add-hook 'js2-mode-hook 'js2-imenu-extras-mode)
   (rename-modeline "js2-mode" js2-mode "JS2")
   :config
-  (use-package tern
-    :ensure t
-    :diminish tern-mode
-    :init
-    (add-hook 'js2-mode-hook 'tern-mode))
   (use-package js-doc
     :ensure t)
   (use-package js2-refactor
@@ -227,9 +220,9 @@
          ("\\.ejs\\'" . web-mode)
          ("\\.jsx\\'" . web-mode))
   :init
-  (setq web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2
+  (setq web-mode-markup-indent-offset 4
+        web-mode-css-indent-offset 4
+        web-mode-code-indent-offset 4
         web-mode-style-padding 2
         web-mode-script-padding 2)
 
@@ -246,9 +239,7 @@
     ;; file is opened, but the errors disappear after the first
     ;; change. Investigate further.
     (flycheck-disable-checker 'html-tidy)
-    (flycheck-select-checker 'javascript-eslint)
-    (tern-mode 1)
-    (diminish 'tern-mode))
+    (flycheck-select-checker 'javascript-eslint))
 
   (defun my-setup-web-mode ()
     (if (equal (file-name-extension buffer-file-name) "jsx")
@@ -270,14 +261,14 @@
 
 (use-package jsx-mode
   :ensure t
-  :init (setq jsx-indent-level 2))
+  :init (setq jsx-indent-level 4))
 
 (use-package tss
   :ensure t
   :mode ("\\.ts\\'" . typescript-mode))
 
 (use-package css-mode
-  :init (setq css-indent-offset 2)
+  :init (setq css-indent-offset 4)
   :config
   (use-package rainbow-mode
     :ensure t
@@ -310,6 +301,10 @@
   (add-hook 'cider-mode-hook #'eldoc-mode))
 
 (load custom-file 'no-error 'no-message)
+
+;; Autocomplete
+(require 'auto-complete-config)
+(ac-config-default)
 
 (provide 'init)
 ;;; init.el ends here
