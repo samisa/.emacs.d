@@ -22,38 +22,9 @@
   :if (memq window-system '(mac ns))
   :config (exec-path-from-shell-initialize))
 
-(use-package solarized-theme
-  :ensure t
-  :if window-system
-  :init
-  (setq solarized-distinct-fringe-background t
-        solarized-use-variable-pitch nil
-        solarized-use-less-bold t
-        solarized-emphasize-indicators nil
-        solarized-scale-org-headlines nil
-        color-base03    "#002b36"
-        color-base02    "#073642"
-        color-base01    "#586e75"
-        color-base00    "#657b83"
-        color-base0     "#839496"
-        color-base1     "#93a1a1"
-        color-base2     "#eee8d5"
-        color-base3     "#fdf6e3"
-        color-yellow    "#b58900"
-        color-orange    "#cb4b16"
-        color-red       "#dc322f"
-        color-magenta   "#d33682"
-        color-violet    "#6c71c4"
-        color-blue      "#268bd2"
-        color-cyan      "#2aa198"
-        color-green     "#859900"
-        color-mode-line-background "#084150")
-  :config
-  (load-theme 'solarized-dark t)
-  (set-face-attribute 'region nil :background color-base3 :foreground color-magenta)
-  (set-face-attribute 'mode-line nil :background color-mode-line-background :box nil))
-  (add-to-list 'default-frame-alist '(font .  "DejaVu Sans Mono-9" ))
-  (set-face-attribute 'default t :font  "DejaVu Sans Mono-9" )
+(load-theme 'tsdh-dark t)
+(add-to-list 'default-frame-alist '(font .  "DejaVu Sans Mono-9" ))
+(set-face-attribute 'default t :font  "DejaVu Sans Mono-9" )
 
 (use-package smart-mode-line
   :ensure t
@@ -305,6 +276,14 @@
 ;; Autocomplete
 (require 'auto-complete-config)
 (ac-config-default)
+
+;;; ==================== DIMINISH ==================== ;;;
+
+;; Diminish mode line
+(diminish 'anzu-mode)
+;;(diminish 'autopair-mode)
+(diminish 'global-whitespace-mode)
+(diminish 'volatile-highlights-mode)
 
 (provide 'init)
 ;;; init.el ends here
