@@ -6,6 +6,8 @@
 (require 'init-defaults)
 (require 'init-package)
 
+(use-package groovy-mode)
+
 (use-package misc
   :bind ("M-z" . zap-up-to-char))
 
@@ -252,24 +254,34 @@
 
 (use-package scss-mode
   :ensure t
-  :mode (("\\.scss\\'" . scss-mode)
+  :mode (("\\.sass\\'" . scss-mode)
+         ("\\.scss\\'" . scss-mode)
+         ("\\.cssm\\'" . scss-mode)
          ("\\.postcss\\'" . scss-mode)))
 
-(use-package scala-mode2
-  :ensure t
-  :config
-  (use-package sbt-mode
-    :ensure t)
-  (use-package ensime
-    :ensure t
-    :init
-    (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)))
+;; (use-package scala-mode2
+;;   :ensure t
+;;   :config
+;;   (use-package sbt-mode
+;;     :ensure t)
+;;   (use-package ensime
+;;     :ensure t
+;;     :init
+;;     (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)))
 
 (use-package cider
   :ensure t
   :config
   (add-hook 'clojure-mode-hook #'cider-mode)
   (add-hook 'cider-mode-hook #'eldoc-mode))
+
+(use-package dired+
+  :ensure t
+  :config
+  (diredp-toggle-find-file-reuse-dir 1)
+  :init
+  (setq diredp-hide-details-initially-flag nil))
+
 
 (load custom-file 'no-error 'no-message)
 
