@@ -6,6 +6,7 @@
 (require 'init-defaults)
 (require 'init-package)
 
+;; If loading of groovy mode fails for some reason, manual installation via package-list-packages may help.
 (use-package groovy-mode)
 
 (use-package misc
@@ -57,10 +58,10 @@
   :ensure t
   :bind ("C-=" . er/expand-region))
 
-(use-package multiple-cursors
-  :ensure t
-  :bind ("C-c m c" . mc/edit-lines)
-  :init (setq mc/list-file (concat my-gen-dir "mc-lists.el")))
+;; (use-package multiple-cursors
+;;   :ensure t
+;;   :bind ("C-c m c" . mc/edit-lines)
+;;   :init (setq mc/list-file (concat my-gen-dir "mc-lists.el")))
 
 (use-package volatile-highlights
   :ensure t
@@ -103,26 +104,26 @@
 (use-package ag
   :ensure t)
 
-(use-package helm
-  :ensure t
-  :diminish helm-mode
-  :bind (("C-c i" . helm-imenu)
-         ("M-y" . helm-show-kill-ring))
-  :init
-  (require 'helm-config)
-  (helm-mode 1)
+;; (use-package helm
+;;   :ensure t
+;;   :diminish helm-mode
+;;   :bind (("C-c i" . helm-imenu)
+;;          ("M-y" . helm-show-kill-ring))
+;;   :init
+;;   (require 'helm-config)
+;;   (helm-mode 1)
 
-  ;; https://www.reddit.com/r/emacs/comments/345vtl/make_helm_window_at_the_bottom_without_using_any/
-  (add-to-list 'display-buffer-alist
-               `(,(rx bos "*helm" (* not-newline) "*" eos)
-                 (display-buffer-in-side-window)
-                 (inhibit-same-window . t)
-                 (window-height . 0.4)))
-  (use-package helm-ag
-    :ensure t
-    :bind ("C-c h a" . helm-ag))
-  (use-package helm-spotify
-    :ensure t))
+;;   ;; https://www.reddit.com/r/emacs/comments/345vtl/make_helm_window_at_the_bottom_without_using_any/
+;;   (add-to-list 'display-buffer-alist
+;;                `(,(rx bos "*helm" (* not-newline) "*" eos)
+;;                  (display-buffer-in-side-window)
+;;                  (inhibit-same-window . t)
+;;                  (window-height . 0.4)))
+;;   (use-package helm-ag
+;;     :ensure t
+;;     :bind ("C-c h a" . helm-ag))
+;;   (use-package helm-spotify
+;;     :ensure t)
 
 (use-package projectile
   :ensure t
@@ -130,7 +131,10 @@
   (projectile-global-mode)
   (use-package helm-projectile
     :ensure t
-    :bind ("C-c p s a" . helm-projectile-ag)))
+    :bind ("C-c p s a" . helm-projectile-ag))
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+)
 
 (use-package flycheck
   :ensure t
