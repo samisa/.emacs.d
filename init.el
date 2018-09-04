@@ -104,15 +104,14 @@
 (use-package ag
   :ensure t)
 
-;; (use-package helm
-;;   :ensure t
-;;   :diminish helm-mode
-;;   :bind (("C-c i" . helm-imenu)
-;;          ("M-y" . helm-show-kill-ring))
-;;   :init
-;;   (require 'helm-config)
-;;   (helm-mode 1)
-
+(use-package helm
+  :ensure t
+  :diminish helm-mode
+  :bind (("C-c i" . helm-imenu)
+         ("M-y" . helm-show-kill-ring))
+  :init
+  (require 'helm-config)
+  (helm-mode 1)
 ;;   ;; https://www.reddit.com/r/emacs/comments/345vtl/make_helm_window_at_the_bottom_without_using_any/
 ;;   (add-to-list 'display-buffer-alist
 ;;                `(,(rx bos "*helm" (* not-newline) "*" eos)
@@ -124,6 +123,7 @@
 ;;     :bind ("C-c h a" . helm-ag))
 ;;   (use-package helm-spotify
 ;;     :ensure t)
+)
 
 (use-package projectile
   :ensure t
